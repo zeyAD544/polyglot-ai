@@ -630,7 +630,8 @@
 
 // ── Configuration ──────────────────────────────────────────────────────────
 // ⚠️ Exposed client-side: replace this string to use a different key.
-const GROQ_API_KEY = "__GROQ_API_KEY__"; // Replaced with the GROQ_API_KEY secret during deployment (see .github/workflows/deploy.yml)
+// Client-side key (user-supplied; stored locally, never committed).
+let GROQ_API_KEY = (window.localStorage && localStorage.getItem("groq_api_key")) || "";
 // Add spare keys here only if needed; key sharing is still client-side exposure.
 const GROQ_BACKUP_KEYS = [];
 
@@ -1068,6 +1069,13 @@ function swapLanguages() {
 
 async function handleTranslate() {
   if (state.busy) return;
+
+  if (!GROQ_API_KEY) {
+    const entered = window.prompt("Paste your Groq API key to translate (stored only in this browser):");
+    if (!entered) return;
+    GROQ_API_KEY = entered.trim();
+    try { localStorage.setItem("groq_api_key", GROQ_API_KEY); } catch (_) {}
+  }
 
   const text = el.input.value;
   const sourceCode = el.source.value;
