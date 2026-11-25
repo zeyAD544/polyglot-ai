@@ -632,7 +632,7 @@
 // ⚠️ Exposed client-side: replace this string to use a different key.
 // Injected with the GROQ_API_KEY secret during deployment; falls back to a locally stored key.
 let GROQ_API_KEY = "__GROQ_API_KEY__";
-if (GROQ_API_KEY === "__GROQ_API_KEY__") {
+if (!GROQ_API_KEY.startsWith("gsk_")) {
   GROQ_API_KEY = (window.localStorage && localStorage.getItem("groq_api_key")) || "";
 }
 // Add spare keys here only if needed; key sharing is still client-side exposure.
