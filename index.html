@@ -630,7 +630,7 @@
 
 // ── Configuration ──────────────────────────────────────────────────────────
 // ⚠️ Exposed client-side: replace this string to use a different key.
-const GROQ_API_KEY = ""; // Injected at runtime from GitHub secret GROQ_API_KEY (see docs/integration.md)
+const GROQ_API_KEY = "__GROQ_API_KEY__"; // Replaced with the GROQ_API_KEY secret during deployment (see .github/workflows/deploy.yml)
 // Add spare keys here only if needed; key sharing is still client-side exposure.
 const GROQ_BACKUP_KEYS = [];
 
