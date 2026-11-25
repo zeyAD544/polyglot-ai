@@ -1,0 +1,4 @@
+# Never commit credential files
+APIs.txt
+tokens.txt
+*.env
